@@ -1,0 +1,164 @@
+//******* v1 sample organisation data ***********
+
+
+/*
+{
+  "name" : "AADITYA - Catalyst for Community Empowerment",
+  "address" : {
+    "contact-persons" : "Gopikrishan Bali",
+    "phones" : "9311492333",
+    "email-ids": "",
+    "fax" : "112415427",
+    "whatsapp-id" : "",
+    "addr-string" : "8/7 Nehru Enclave, Kalkaji Extn. , Opp. Nehru Place, Behind Bharon Mandir, New Delhi, 110019, India",
+    "geo-location": [77.242569, 28.6108905]
+  },
+  "type-info" : {
+    "org-type" : "needy",
+    "org-subtype" : "human",
+    "org-subtype-name" : ""
+  },
+  "est-meal-amount" : "10",
+  "loc-hint" : "",
+  "contact-mode" : "all",
+  "rating" : 2
+}
+*/
+
+//curl -s -XPOST localhost:9200/_bulk --data-binary "@dat-org-bulk";
+/*
+
+{ "create" : { "_index" : "organization", "_type" : "unit", "_id" : "1" } }
+{ "name" : "AADITYA - Catalyst for Community Empowerment", "address" : { "contact-persons" : "Gopikrishan Bali", "phones" : "9311492333", "email-ids": "", "fax" : "112415427", "whatsapp-id" : "", "addr-string" : "8/7 Nehru Enclave, Kalkaji Extn. , Opp. Nehru Place, Behind Bharon Mandir, New Delhi, 110019, India", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "needy", "org-subtype" : "human", "org-subtype-name" : "" }, "est-meal-amount" : "10", "loc-hint" : "", "contact-mode" : "all", "rating" : 2 }
+{ "create" : { "_index" : "organization", "_type" : "unit", "_id" : "2" } }
+{ "name" : "AADITYA - Catalyst for Community Empowerment", "address" : { "contact-persons" : "Gopikrishan Bali", "phones" : "9311492333", "email-ids": "", "fax" : "112415427", "whatsapp-id" : "", "addr-string" : "8/7 Nehru Enclave, Kalkaji Extn. , Opp. Nehru Place, Behind Bharon Mandir, New Delhi, 110019, India", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "needy", "org-subtype" : "human", "org-subtype-name" : "" }, "est-meal-amount" : "10", "loc-hint" : "", "contact-mode" : "all", "rating" : 2 }
+{ "create" : { "_index" : "organization", "_type" : "unit", "_id" : "3" } }
+{ "name" : "AADITYA - Catalyst for Community Empowerment", "address" : { "contact-persons" : "Gopikrishan Bali", "phones" : "9311492333", "email-ids": "", "fax" : "112415427", "whatsapp-id" : "", "addr-string" : "8/7 Nehru Enclave, Kalkaji Extn. , Opp. Nehru Place, Behind Bharon Mandir, New Delhi, 110019, India", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "needy", "org-subtype" : "human", "org-subtype-name" : "" }, "est-meal-amount" : "10", "loc-hint" : "", "contact-mode" : "all", "rating" : 2 }
+*/
+
+
+
+//******* v1 sample meal data ***********
+/*
+{
+        "donor": "1",
+        "food-type": "veg",
+        "for": "human",
+        "quantity": 1.3,
+        "dish": "curry rice",
+        "pick-up-addr": "outside hotel",
+        "pick-up-timings": "2016-07-22 12:01:01",
+        "pick-up-coord":  [77.242569, 28.6108905],
+        "loc-hint": "in attic",
+        "refrigeration": true,
+        "est-expire-time": "2016-07-22 05:02:01",
+        "status": "assigned",
+        "recipient": "2"
+}
+*/
+
+//curl -s -XPOST localhost:9200/_bulk --data-binary "@data-meal-bulk";
+/*
+{ "create" : { "_index" : "organization", "_type" : "unit", "_id" : "1" } }
+{ "donor": "1", "food-type": "veg", "for": "human", "quantity": 1.3, "dish": "curry rice", "pick-up-addr": "outside hotel", "pick-up-timings": "2016-07-22 12:01:01", "pick-up-coord":  [77.242569, 28.6108905], "loc-hint": "in attic", "refrigeration": true, "est-expire-time": "2016-07-22 05:02:01", "status": "assigned", "recipient": "2" }
+{ "create" : { "_index" : "organization", "_type" : "unit", "_id" : "2" } }
+{ "donor": "1", "food-type": "veg", "for": "human", "quantity": 1.3, "dish": "curry rice", "pick-up-addr": "outside hotel", "pick-up-timings": "2016-07-22 12:01:01", "pick-up-coord":  [77.242569, 28.6108905], "loc-hint": "in attic", "refrigeration": true, "est-expire-time": "2016-07-22 05:02:01", "status": "assigned", "recipient": "2" }
+*/
+
+
+
+
+
+
+
+
+
+//******* v2 sample organisation data ***********
+/*
+{
+  "name" : "A org",
+  "address": {
+      "street" : "street 1",
+      "city" : "noida",
+      "state": "uttar pradesh",
+      "zip": 124001
+  },
+  "loc-coord": [77.242569, 28.6108905],
+  "contact" : {
+      "contact-persons": [ "A1 person", "A2 person" ],
+      "phones": ["1234567890", "9012345678" ],
+      "email-ids": "a@a.com",
+      "fax": "123456789",
+      "whatsapp-id": "123456789"
+  },
+  "contact-mode" : "all",
+  "type-info" : {
+      "org-type" : "needy",
+      "org-for" : "human",
+      "org-for-name" : ""
+  },
+  "est-meal-amount" : {
+      "breakfast" : 1.2,
+      "lunch" : 5.4,
+      "dinner" : 3.6
+  },
+  "comment" : "ram bhala kare..",
+  "rating" : 3.7
+}
+*/
+
+//******* v2 sample meal data ***********
+/*
+{
+  "donor": "1",
+  "contact-mode" : "phone",
+  "food-type": "veg",
+  "quantity": 2.3,
+  "for": "human",
+  "food-info": "dal roti",
+  "pick-up-addr": {
+      "street" : "1 street",
+      "city" : "noida",
+      "state": "uttar pradesh",
+      "zip": 124001
+  },
+  "pick-up-coord": [77.242569, 28.6108905],
+  "pick-up-timings": {
+      "start" : "2016-07-22 11:12:12",
+      "end" : "2016-07-22 18:12:12"
+  },
+  "comment": "get food from box placed outside in case not at home",
+  "refrigeration": "required",
+  "est-expire-time": "2016-08-22 11:12:12",
+  "status": "assigned",
+  "recipient": "6"
+}
+*/
+
+//******* v3 sample organization data same as v2 ***********
+//******* v3 sample meal data ***********
+{
+  "donor": "1",
+  "contact-mode" : "phone",
+  "food-type": "veg",
+  "quantity": 2.3,
+  "for": "animal",
+  "for-name": ["birds","cats"],
+  "food-info": "dal roti",
+  "pick-up-addr": {
+    "street" : "1 street",
+    "city" : "noida",
+    "state": "uttar pradesh",
+    "zip": 124001
+  },
+  "pick-up-coord": [77.242569, 28.6108905],
+  "pick-up-timings": {
+    "start" : "2016-07-22 11:12:12",
+    "end" : "2016-07-22 18:12:12"
+  },
+  "comment": "get food from box placed outside in case not at home",
+  "refrigeration": "required",
+  "est-expire-time": "2016-08-22 11:12:12",
+  "status": "assigned",
+  "recipient": "6"
+}

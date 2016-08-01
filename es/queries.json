@@ -1,0 +1,61 @@
+// fetch org info
+/*{
+  "query": {
+    "filtered": {
+      "filter": {
+        "geo_distance": {
+          "distance": "10km",
+          "distance_type": "plane",
+          "loc-coord": [77.242569, 28.6108904]
+        }
+      }
+    }
+  }
+}*/
+
+// fetch info based on org _id
+
+
+//fetch meals available around
+// "food-type": "veg", "for": "human", "for-name": "",
+//"pick-up-timings": { "start" : "2016-07-22 11:12:12", "end" : "2016-07-31 18:12:12" }
+// "refrigeration": "required", "est-expire-time": "2016-08-22 11:12:12"
+// "status": "", "recipient": ""
+/*{
+  "query": {
+    "bool" : {
+      "must" : [
+        { "term" : { "food-type": "veg" } },
+        { "term" : { "for": "human" } },
+        { "term" : { "refrigeration": false } }
+      ],
+      "filter": {
+        "geo_distance": {
+          "distance": "1km",
+          "distance_type": "plane",
+          "pick-up-coord": [77.242518, 29.6108904]
+        }
+      }
+    }
+  }
+}*/
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term" : { "food-type": "veg" } },
+        { "term" : { "for": "human" } },
+        { "term" : { "refrigeration": false } }
+      ],
+      "filter": {
+        "geo_distance": {
+          "distance": "200km",
+          "pick-up-coord": [77.24, 29.62 ]
+        }
+      }
+    }
+  }
+}
+
+//update api for meals status and recipient

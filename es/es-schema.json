@@ -1,0 +1,414 @@
+/*
+using es as data store
+updation in es
+add source, all, use searchable fields etc
+*/
+
+//put localhost:9200/organization/
+/*
+todo what are best datatype for each field
+add shards settings
+ add analysers, analysed or not
+ add format to date: "format": "yyyy-MM-dd HH:mm:ss"
+*/
+/*
+{
+    "settings" : {
+      "number_of_shards" : 1,
+      "number_of_replicas" : 1
+    },
+    "mappings": {
+      "unit" : {
+        "_source": {
+          "enabled": true
+        },
+        "properties" : {
+          "name" : { "type" : "string" },
+          "address" : {
+            "type" : "object",
+            "properties" : {
+              "contact-persons": {
+                "type": "string"
+              },
+              "phones": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "email-ids": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "fax": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "whatsapp-id": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "addr-string": {
+                "type": "string",
+                "index": "analyzed"
+              },
+              "loc-coord": {
+                "type": "geo_point"
+              }
+            }
+          },
+          "type-info" : {
+            "type" : "object",
+            "properties" : {
+              "org-type" : { "type" : "string", "index": "not_analyzed" },
+              "org-subtype" : { "type" : "string", "index": "not_analyzed" },
+              "org-subtype-name" : { "type" : "string", "index": "not_analyzed" }
+            }
+          },
+          "est-meal-amount" : { "type" : "float", "index": "not_analyzed" },
+          "loc-hint" : { "type":"string", "index": "analyzed" },
+          "contact-mode" : { "type" : "string", "index": "no" },
+          "rating" : { "type" : "float", "index": "no" }
+        }
+      }
+  }
+}
+*/
+
+
+//put localhost:9200/meal/
+/*
+"_source" : {
+        "enabled" : false
+      },
+*/
+/*
+
+{
+  "settings" : {
+    "number_of_shards" : 1,
+    "number_of_replicas" : 1
+  },
+  "mappings": {
+    "unit": {
+      "_source": {
+        "enabled": true
+      },
+      "properties" : {
+        "donor": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "food-type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "for": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "quantity": {
+          "type": "float",
+          "index": "not_analyzed"
+        },
+        "dish": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "pick-up-addr": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "pick-up-timings": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss",
+          "index": "not_analyzed"
+        },
+        "pick-up-coord": {
+          "type": "geo_point"
+        },
+        "loc-hint": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "refrigeration": {
+          "type": "boolean",
+          "index": "not_analyzed"
+        },
+        "est-expire-time": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss",
+          "index": "not_analyzed"
+        },
+        "status": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "recipient": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+*/
+
+// *************** v2 ************************
+
+/*
+{
+  "settings" : {
+    "number_of_shards" : 1,
+    "number_of_replicas" : 1
+  },
+  "mappings": {
+    "unit" : {
+      "_source": {
+        "enabled": true
+      },
+      "properties" : {
+        "name" : { "type" : "string", "index" : "not_analyzed" },
+        "address": {
+          "type": "object",
+          "properties" : {
+            "street" : { "type" : "string", "index": "analyzed" },
+            "city" : { "type" : "string", "index": "not_analyzed" },
+            "state": { "type" : "string", "index": "not_analyzed" },
+            "zip": { "type" : "integer", "index": "not_analyzed" }
+          }
+        },
+        "loc-coord": {
+          "type": "geo_point"
+        },
+        "contact" : {
+          "type" : "object",
+          "properties" : {
+            "contact-persons": {
+              "type": "string"
+            },
+            "phones": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "email-ids": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "fax": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "whatsapp-id": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          }
+        },
+        "contact-mode" : { "type" : "string", "index": "not_analyzed" },
+        "type-info" : {
+          "type" : "object",
+          "properties" : {
+            "org-type" : { "type" : "string", "index": "not_analyzed" },
+            "org-for" : { "type" : "string", "index": "not_analyzed" },
+            "org-for-name" : { "type" : "string", "index": "analyzed" }
+          }
+        },
+        "est-meal-amount" : {
+          "type" : "object",
+          "properties" : {
+            "breakfast" : { "type" : "float", "index": "not_analyzed" },
+            "lunch" : { "type" : "float", "index": "not_analyzed" },
+            "dinner" : { "type" : "float", "index": "not_analyzed" }
+          }
+        },
+        "comment" : { "type":"string", "index": "analyzed" },
+        "rating" : { "type" : "float", "index": "no" }
+      }
+    }
+  }
+}
+*/
+
+/*
+{
+  "settings" : {
+    "number_of_shards" : 1,
+    "number_of_replicas" : 1
+  },
+  "mappings": {
+    "unit": {
+      "_source": {
+        "enabled": true
+      },
+      "properties" : {
+        "donor": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "contact-mode" : {
+          "type" : "string",
+          "index": "not_analyzed"
+        },
+        "food-type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "quantity": {
+          "type": "float",
+          "index": "not_analyzed"
+        },
+        "for": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "food-info": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "pick-up-addr": {
+          "type": "object",
+          "properties" : {
+            "street" : { "type" : "string", "index": "analyzed" },
+            "city" : { "type" : "string", "index": "not_analyzed" },
+            "state": { "type" : "string", "index": "not_analyzed" },
+            "zip": { "type" : "integer", "index": "not_analyzed" }
+          }
+        },
+        "pick-up-coord": {
+          "type": "geo_point"
+        },
+        "pick-up-timings": {
+          "type" : "object",
+          "properties" : {
+            "start" : {
+              "type": "date",
+              "format": "yyyy-MM-dd HH:mm:ss",
+              "index": "not_analyzed"
+            },
+            "end" : {
+              "type": "date",
+              "format": "yyyy-MM-dd HH:mm:ss",
+              "index": "not_analyzed"
+            }
+          }
+        },
+        "comment": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "refrigeration": {
+          "type": "boolean",
+          "index": "not_analyzed"
+        },
+        "est-expire-time": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss",
+          "index": "not_analyzed"
+        },
+        "status": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "recipient": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+*/
+
+// *** v3 ***
+// *** organization same as v2 ***
+// *** meal ****
+{
+  "settings" : {
+    "number_of_shards" : 1,
+    "number_of_replicas" : 1
+  },
+  "mappings": {
+    "unit": {
+      "_source": {
+        "enabled": true
+      },
+      "properties" : {
+        "donor": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "contact-mode" : {
+          "type" : "string",
+          "index": "not_analyzed"
+        },
+        "food-type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "quantity": {
+          "type": "float",
+          "index": "not_analyzed"
+        },
+        "for": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "for-name": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "food-info": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "pick-up-addr": {
+          "type": "object",
+          "properties" : {
+            "street" : { "type" : "string", "index": "analyzed" },
+            "city" : { "type" : "string", "index": "not_analyzed" },
+            "state": { "type" : "string", "index": "not_analyzed" },
+            "zip": { "type" : "integer", "index": "not_analyzed" }
+          }
+        },
+        "pick-up-coord": {
+          "type": "geo_point"
+        },
+        "pick-up-timings": {
+          "type" : "object",
+          "properties" : {
+            "start" : {
+              "type": "date",
+              "format": "yyyy-MM-dd HH:mm:ss",
+              "index": "not_analyzed"
+            },
+            "end" : {
+              "type": "date",
+              "format": "yyyy-MM-dd HH:mm:ss",
+              "index": "not_analyzed"
+            }
+          }
+        },
+        "comment": {
+          "type": "string",
+          "index": "analyzed"
+        },
+        "refrigeration": {
+          "type": "boolean",
+          "index": "not_analyzed"
+        },
+        "est-expire-time": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss",
+          "index": "not_analyzed"
+        },
+        "status": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "recipient": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}

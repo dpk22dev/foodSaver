@@ -1,0 +1,200 @@
+/*
+PUT /company
+{
+  "mappings": {
+    "branch": {},
+    "employee": {
+      "_parent": {
+        "type": "branch"
+      }
+    }
+  }
+}
+
+// employee is child of branch
+
+POST /company/branch/_bulk
+{ "index": { "_id": "london" }}
+{ "name": "London Westminster", "city": "London", "country": "UK" }
+{ "index": { "_id": "liverpool" }}
+{ "name": "Liverpool Central", "city": "Liverpool", "country": "UK" }
+{ "index": { "_id": "paris" }}
+{ "name": "Champs Élysées", "city": "Paris", "country": "France" }
+
+// inserted branches
+
+PUT /company/employee/1?parent=london
+{
+  "name":  "Alice Smith",
+  "dob":   "1970-10-24",
+  "hobby": "hiking"
+}
+
+//inserted employee
+
+POST /company/employee/_bulk
+{ "index": { "_id": 2, "parent": "london" }}
+{ "name": "Mark Thomas", "dob": "1982-05-16", "hobby": "diving" }
+{ "index": { "_id": 3, "parent": "liverpool" }}
+{ "name": "Barry Smith", "dob": "1979-04-01", "hobby": "hiking" }
+{ "index": { "_id": 4, "parent": "paris" }}
+{ "name": "Adrien Grand", "dob": "1987-05-11", "hobby": "horses" }
+
+// inserted in bulk; problem is that
+*/
+
+PUT /foodSaver
+{
+  "mappings": {
+    "organization" : {
+
+      "properties" : {
+        "name" : {
+          "type" :    "string",
+          "analyzer": "english"
+        },
+        "address" : {
+          "type" :   "object",
+          "properties" : {
+            "contact_person" : { "type": "string" },
+            "phone_numbers" : { "type" : "long" },
+            "email_ids" : { "type" : "string"},
+            "fax" : { "type" : "string" }
+          }
+        },
+        "type" : {
+          "type" :   "string"
+        },
+        "est_meal_amount" : {
+          "type" :   "long"
+        },
+        "position" : {
+            "type" : "string"
+        },
+        "contact_type" : {
+            "type" : "int"
+        },
+        "rating" : {
+            "type" : "int"
+        }
+
+      }
+
+    }
+  }
+}
+
+
+PUT /foodsaver/organization/1
+{
+  "name":     "John Smith",
+  "email":    "john@smith.com",
+  "dob":      "1970/10/24"
+}
+
+PUT /my_index/blogpost/2
+{
+  "title":    "Relationships",
+  "body":     "It's complicated...",
+  "user":     1
+}
+
+*************** query notes ***********
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "term" : {
+                    "price" : 20
+                }
+            }
+        }
+    }
+}
+
+combining filters:
+{
+   "bool" : {
+      "must" :     [],
+      "should" :   [],
+      "must_not" : [],
+      "filter":    []
+   }
+}
+
+here bool query is nested in constant_score query
+eg:
+{
+   "query" : {
+      "constant_score" : {
+         "filter" : {
+            "bool" : {
+              "should" : [
+                 { "term" : {"price" : 20}},
+                 { "term" : {"productID" : "XHDK-A-1293-#fJ3"}}
+              ],
+              "must_not" : {
+                 "term" : ["price" : 30, "price" : 40 ]
+              }
+           }
+         }
+      }
+   }
+}
+
+
+// range queries
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "range" : {
+                    "price" : {
+                        "gte" : 20,
+                        "lt"  : 40
+                    }
+                }
+            }
+        }
+    }
+}
+
+//field exists or not
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "exists" : { "field" : "tags" }
+            }
+        }
+    }
+}
+
+// The missing query is essentially the inverse of exists: it returns documents where there is no value
+for a particular field, replace exists with missing
+
+//for full text search, use match query:
+{
+    "query": {
+        "match": {
+            "title": {
+                "query":    "BROWN DOG!",
+                "operator": "and"
+            }
+        }
+    }
+}
+
+// for controlling precision, instead of "operator": "and" use "minimum_should_match": "75%"
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "title": "brown" }},
+        { "match": { "title": "fox"   }},
+        { "match": { "title": "dog"   }}
+      ],
+      "minimum_should_match": 2
+    }
+  }
+}

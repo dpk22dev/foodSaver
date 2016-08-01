@@ -1,0 +1,86 @@
+extends layout
+
+block css
+  if env=="development"
+    link(rel="stylesheet", href="/stylesheets/external/bootstrap.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    // link(rel='stylesheet', href='css/app.css')
+    // link(rel='stylesheet', href='css/bootstrap.css')
+    link(rel='stylesheet', href='/bower_components/angular-loading-bar/build/loading-bar.css' )
+  else
+    link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/bower_components/angular-loading-bar/build/loading-bar.min.css' )
+block js
+  if env=="development"
+    script(src="/javascripts/external/bootstrap.js")
+    script(src="/javascripts/external/jquery.js")
+
+    script(src="/bower_components/angular/angular.js")
+    script(src="/bower_components/angular-route/angular-route.js")
+
+    script(src='/bower_components/angular-cookies/angular-cookies.js')
+    script( src='/bower_components/angular-local-storage/angular-local-storage.js' )
+    //script(src="/javascripts/services/logTimer.js")
+
+    script(src="/javascripts/main-foodsaver.js")
+
+    script(src="/javascripts/controllers/indexController.js")
+    script(src="/javascripts/controllers/loginController.js")
+    script(src="/javascripts/controllers/profileController.js")
+    script(src="/javascripts/controllers/searchController.js")
+
+    script(src="/javascripts/services/configs.js")
+    script(src="/javascripts/services/logger.js")
+
+    script( src='/bower_components/angular-loading-bar/build/loading-bar.js' )
+    script( src='/bower_components/angular-animate/angular-animate.js' )
+  else
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
+    script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+    script(src="/dist/js/bower_components.min.js")
+    script(src="/dist/js/main.min.js")
+
+block content
+    div( ng-app="foodsaver" )
+
+        div.alert.alert-danger.hidden
+            a(href="#", class="close")
+            p alert message
+
+        nav.navbar
+            div.container-fluid
+                div.navbar-header
+                    img(src="/images/savefood.jpg")
+
+                if showNav
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href="#home") Home
+                        li.dropdown
+                            a(href="#", class="dropdown-toggle", data-toggle="dropdown" ) profile
+                                span.caret
+                            ul.dropdown-menu
+                                //li
+                                  //a(href="#") Assigned Channel
+                                //li
+                                  //a(href="#") Assigned Content
+                                li
+                                    a(href="#search") Search
+                        //li
+                          //a(href="#") SMS Reader Opinion
+                        //li
+                          //a(href="#") Assign Reader Opinion
+                        li
+                            a(href="#history") History
+
+                else
+                    | For accessing this site please login
+
+                div.navbar-header.pull-right
+                    div( class="loginWrapper", ng-controller="loginController" )
+                        span {{loginStatusText}}
+                        button( class="btn btn-danger", type="button", ng-click="loginButtonClicked()", ng-show="showLoginBtn" )
+                            span.glyphicons.glyphicons-ok {{loginBtnText}}
+
+        div( ng-controller="indexController" )
+            div(ng-view)

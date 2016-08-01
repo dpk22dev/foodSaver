@@ -1,0 +1,31 @@
+// ******** v1 data *********
+/*
+[
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "1" } }
+  { "name" : "A org", "address" : { "contact-persons" : "A person", "phones" : "9311492333", "email-ids": "a@amail.com", "fax" : "112415427", "whatsapp-id" : "", "addr-string" : "noida sector 15, India", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "needy", "org-subtype" : "human", "org-subtype-name" : "" }, "est-meal-amount" : "10", "loc-hint" : "box outside house", "contact-mode" : "all", "rating" : 3.1 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "2" } }
+  { "name" : "B org", "address" : { "contact-persons" : "B person", "phones" : "9311492354", "email-ids": "b@bmail.com", "fax" : "112415422", "whatsapp-id" : "8383038138", "addr-string" : "noida sector 16", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "needy", "org-subtype" : "animal", "org-subtype-name" : "cow" }, "est-meal-amount" : "10", "loc-hint" : "", "contact-mode" : "all", "rating" : 2 }
+
+
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "3" } }
+  { "name" : "C corp", "address" : { "contact-persons" : "C person", "phones" : "9311492222", "email-ids": "c@cmail.com", "fax" : "112412427", "whatsapp-id" : "", "addr-string" : "botanical garden", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "donor", "org-subtype" : "", "org-subtype-name" : "" }, "est-meal-amount" : "20", "loc-hint" : "", "contact-mode" : "all", "rating" : 4.1 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "4" } }
+  { "name" : "D corp", "address" : { "contact-persons" : "D person", "phones" : "9311492221", "email-ids": "d@dmail.com", "fax" : "112412417", "whatsapp-id" : "112412417", "addr-string" : "golf course", "geo-location": [77.242569, 28.6108905] }, "type-info" : { "org-type" : "donor", "org-subtype" : "", "org-subtype-name" : "" }, "est-meal-amount" : "50", "loc-hint" : "", "contact-mode" : "call", "rating" : 4.5 }
+]
+*/
+
+// ******** v2 data *********
+[
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "1" } }
+  { "name" : "A org", "address": {"street" : "street 1a", "city" : "noida", "state": "uttar pradesh", "zip": 124001 }, "loc-coord": [77.242569, 28.6108905], "contact" : { "contact-persons": [ "A1 person", "A2 person" ], "phones": ["1234567890", "9012345678" ], "email-ids": "a@a.com", "fax": "123456789", "whatsapp-id": "123456789" }, "contact-mode" : "all", "type-info" : { "org-type" : "donor", "org-for" : "human", "org-for-name" : "" }, "est-meal-amount" : { "breakfast" : 1.2, "lunch" : 5.4, "dinner" : 3.6 }, "comment" : "ram bhala kare..", "rating" : 3.5 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "2" } }
+  { "name" : "B org", "address": {"street" : "street 1b", "city" : "noida", "state": "uttar pradesh", "zip": 124001 }, "loc-coord": [76.242569, 29.6108905], "contact" : { "contact-persons": [ "B1 person", "B2 person" ], "phones": ["1234567890", "9012345678" ], "email-ids": "b@a.com", "fax": "123456789", "whatsapp-id": "123456789" }, "contact-mode" : "call", "type-info" : { "org-type" : "needy", "org-for" : "human", "org-for-name" : "" }, "est-meal-amount" : { "breakfast" : 1.2, "lunch" : 5.4, "dinner" : 3.6 }, "comment" : "ram bhala kare..", "rating" : 3.8 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "3" } }
+  { "name" : "C org", "address": {"street" : "street 1c", "city" : "noida", "state": "uttar pradesh", "zip": 124001 }, "loc-coord": [77.242569, 30.6108905], "contact" : { "contact-persons": [ "C1 person", "C2 person" ], "phones": ["1234567890", "9012345678" ], "email-ids": "c@a.com", "fax": "123456789", "whatsapp-id": "123456789" }, "contact-mode" : "sms", "type-info" : { "org-type" : "donor", "org-for" : "animal", "org-for-name" : ["dog","cat"] }, "est-meal-amount" : { "breakfast" : 1.2, "lunch" : 5.4, "dinner" : 3.6 }, "comment" : "ram bhala kare..", "rating" : 3.2 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "4" } }
+  { "name" : "D org", "address": {"street" : "street 1d", "city" : "noida", "state": "uttar pradesh", "zip": 124001 }, "loc-coord": [78.242569, 28.6108905], "contact" : { "contact-persons": [ "D1 person", "D2 person" ], "phones": ["1234567890", "9012345678" ], "email-ids": "d@a.com", "fax": "123456789", "whatsapp-id": "123456789" }, "contact-mode" : "phone", "type-info" : { "org-type" : "needy", "org-for" : "animal", "org-for-name" : "dog" }, "est-meal-amount" : { "breakfast" : 1.2, "lunch" : 5.4, "dinner" : 3.6 }, "comment" : "ram bhala kare..", "rating" : 2.7 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "5" } }
+  { "name" : "E org", "address": {"street" : "street 1e", "city" : "noida", "state": "uttar pradesh", "zip": 124001 }, "loc-coord": [79.242569, 26.6108905], "contact" : { "contact-persons": [ "E1 person", "E2 person" ], "phones": ["1234567890", "9012345678" ], "email-ids": "e@a.com", "fax": "123456789", "whatsapp-id": "123456789" }, "contact-mode" : "whatsapp", "type-info" : { "org-type" : "donor", "org-for" : "human", "org-for-name" : "" }, "est-meal-amount" : { "breakfast" : 1.2, "lunch" : 5.4, "dinner" : 3.6 }, "comment" : "ram bhala kare..", "rating" : 4.7 }
+  { "create" : { "_index" : "organization", "_type" : "unit", "_id" : "6" } }
+  { "name" : "F org", "address": {"street" : "street 1f", "city" : "noida", "state": "uttar pradesh", "zip": 124001 }, "loc-coord": [76.242519, 28.6108905], "contact" : { "contact-persons": [ "F1 person", "F2 person" ], "phones": ["1234567890", "9012345678" ], "email-ids": "f@a.com", "fax": "123456789", "whatsapp-id": "123456789" }, "contact-mode" : "all", "type-info" : { "org-type" : "needy", "org-for" : "human", "org-for-name" : "" }, "est-meal-amount" : { "breakfast" : 1.2, "lunch" : 5.4, "dinner" : 3.6 }, "comment" : "ram bhala kare..", "rating" : 3.9 }
+]
