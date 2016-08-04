@@ -198,3 +198,19 @@ for a particular field, replace exists with missing
     }
   }
 }
+
+// pagination
+{
+    "from" : 0, "size" : 10,
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+//which parts of source should be returned
+{
+    "_source": "obj.*",
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}

@@ -16,7 +16,43 @@ module.exports = {
     constants: {
         VEG_FOODTYPE: "veg",
         NONVEG_FOODTYPE: "non-veg",
-        HUMAN: "human"
+        HUMAN: "human",
+        MEAL: {
+            CONT_MODE: {
+                ALL: "all",
+                PHONE: "phone",
+                WHATSAPP: "whatsapp"
+            },
+            FOOD_TYPE: {
+                VEG: "veg",
+                NON_VEG: "non-veg"
+            },
+            MEAL_FOR:{
+                HUMAN: {
+                   NAME: 'human',
+                   CHILD: 'children',
+                   OLDAGE: 'oldage',
+                   WOMEN: 'women'
+                },
+                ANIMAL: {
+                   NAME: 'animal',
+                   DOG: 'dog',
+                   CAT: 'cat'
+                }
+            },
+            STATUS : {
+                UNASSIGNED : "unassigned",
+                ASSIGNED: "assigned",
+                PICKED: "picked",
+                RETREAT: "retreat"
+            }
+        },
+        ORG : {
+            ORG_TYPE: {
+                DONOR: "donor",
+                NEEDY: "needy"
+            }
+        }
     }
 
 }

@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     var extend = require('util')._extend;
     var esConn = extend({}, config.es.connection);
 
-    var esQueryProvider = require('../lib/esqueries.js');
+    var esQueryProvider = require('../lib/esMealQueries.js');
 
     var esClient = new elasticSearch.Client( esConn );
     var mealIndex = config.es.mealIndex;
