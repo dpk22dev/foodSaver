@@ -5,6 +5,8 @@ var config = require('../lib/config.js');
 var esQueryProvider = require('../lib/esOrgQueries.js');
 
 var esClient = require('../lib/esClient.js');
+var orgUtils = require('../lib/orgUtils.js');
+
 var orgIndex = config.es.orgIndex;
 var orgType = config.es.orgIndexType;
 
@@ -56,33 +58,50 @@ var getOrgObj = function ( obj ) {
 
 var getOrgObjForSearch = function ( obj ) {
     var res = {};
-    res.orgName = ( obj.orgName !== undefined && obj.orgName.length > 0 ) ? obj.orgName : undefined;
+    res.orgName = orgUtils.getOrgName( obj.orgName );
+        //( obj.orgName !== undefined && obj.orgName.length > 0 ) ? obj.orgName : undefined;
 
-    var lon = ( obj.lon !== undefined ) ? parseFloat( obj.lon ) : 77;
-    var lat = ( obj.lat !== undefined ) ? parseFloat( obj.lat ) : 29;
+    var lon = orgUtils.getLon( obj.lon ); 
+        //( obj.lon !== undefined ) ? parseFloat( obj.lon ) : 77;
+    var lat = orgUtils.getLat( obj.lat ); 
+        //( obj.lat !== undefined ) ? parseFloat( obj.lat ) : 29;
+    
     res.locCoord = [lon, lat];
 
-    res.radius = ( obj.radius !== undefined && obj.radius.length > 0 ) ? obj.radius+'km' : undefined;
+    res.radius = orgUtils.getRadius( obj.radius ); 
+        //( obj.radius !== undefined && obj.radius.length > 0 ) ? obj.radius+'km' : undefined;
 
-    res.orgType = ( obj.orgType !== undefined && obj.orgType.length > 0 ) ? obj.orgType : undefined;
-    res.orgFor = ( obj.orgFor !== undefined && obj.orgFor.length > 0 ) ? obj.orgFor : undefined;
-    res.orgForName = ( obj.orgForName !== undefined && obj.orgForName.length > 0 ) ? obj.orgForName : undefined;
+    res.orgType = orgUtils.getOrgType( obj.orgType ); 
+        //( obj.orgType !== undefined && obj.orgType.length > 0 ) ? obj.orgType : undefined;
+    
+    res.orgFor = orgUtils.getOrgFor( obj.orgFor ); 
+        //( obj.orgFor !== undefined && obj.orgFor.length > 0 ) ? obj.orgFor : undefined;
+    res.orgForName = orgUtils.getOrgForName( obj.orgForName );
+        //( obj.orgForName !== undefined && obj.orgForName.length > 0 ) ? obj.orgForName : undefined;
 
-    res.contactMode = ( obj.contactMode !== undefined && obj.contactMode.length > 0 ) ? obj.contactMode : undefined;
+    res.contactMode = orgUtils.getContactMode( obj.contactMode ); 
+        //( obj.contactMode !== undefined && obj.contactMode.length > 0 ) ? obj.contactMode : undefined;
 
     res.breakfast = {};
-    res.breakfast.min = obj.bmin ? obj.bmin : -1;
-    res.breakfast.max = obj.bmax ? obj.bmax : -1;
+    res.breakfast.min = orgUtils.getBreakFastMin( obj.bmin ); 
+        //obj.bmin ? obj.bmin : -1;
+    res.breakfast.max = orgUtils.getBreakFastMax( obj.bmax); 
+        //obj.bmax ? obj.bmax : -1;
 
     res.lunch = {};
-    res.lunch.min = obj.lmin ? obj.lmin : -1;
-    res.lunch.max = obj.lmax ? obj.lmax : -1;
+    res.lunch.min = orgUtils.getLunchMin( obj.lmin ); 
+        //obj.lmin ? obj.lmin : -1;
+    res.lunch.max = orgUtils.getLunchMax( obj.lmax ); 
+        //obj.lmax ? obj.lmax : -1;
 
     res.dinner = {};
-    res.dinner.min = obj.dmin ? obj.dmin : -1;
-    res.dinner.max = obj.dmax ? obj.dmax : -1;
+    res.dinner.min = orgUtils.getDinnerMin( obj.dmin );
+        //obj.dmin ? obj.dmin : -1;
+    res.dinner.max = orgUtils.getDinnerMax( obj.dmax ); 
+        //obj.dmax ? obj.dmax : -1;
 
-    res.rating = ( obj.rating !== undefined && obj.rating.length > 0 ) ? parseFloat( obj.rating ) : -1;
+    res.rating = orgUtils.getRating( obj.rating ); 
+        //( obj.rating !== undefined && obj.rating.length > 0 ) ? parseFloat( obj.rating ) : -1;
 
     return res;
 }
