@@ -10,34 +10,72 @@ var orgUtils = require('../lib/orgUtils.js');
 var orgIndex = config.es.orgIndex;
 var orgType = config.es.orgIndexType;
 
+/* post params for org
+every request should follow it
+ orgName
+ street
+ city
+ state
+ zip
+ lon
+ lat
+ persons
+ phones
+ emailIds
+ faxes
+ whatsappIds
+ contMode
+ orgType
+ orgFor
+ orgForName
+ estBreakfastAmnt
+ estLunchAmnt
+ estDinnerAmnt
+ comment
+
+ radius
+ bmin
+ bmax
+ lmin
+ lmax
+ dmin
+ dmax
+ rating
+ */
+
 var getOrgObj = function ( obj ) {
     var res = {};
     res.name = orgUtils.getOrgName( obj.orgName );
     res.address = {};
     res.address.street = orgUtils.getStreet( obj.street );
     res.address.city = orgUtils.getCity( obj.city );
-    res.address.state = obj.state ? obj.state : "uttar pradesh";
-    res.address.zip = obj.zip ? obj.zip : '124001';
+    res.address.state = orgUtils.getState( obj.state );
+    res.address.zip = orgUtils.getZip( obj.zip );
     var lon = orgUtils.getLon( obj.lon );
     var lat = orgUtils.getLat( obj.lat );
     res.locCoord = [lon, lat];
-    var contact = {};
-    var persons = obj.persons;
+    res.contact = {};
+    var persons = orgUtils.getPersons( obj.persons );
+    res.contact.contactPersons = [];
     res.contact.contactPersons = persons.split(",");
 
-    var phones = obj.phones;
+    var phones = orgUtils.getPhones(obj.phones);
+    res.contact.phones = [];
     res.contact.phones = phones.split(",");
 
-    var emailIds = obj.emailIds;
+    var emailIds = orgUtils.getEmailIds( obj.emailIds );
+    res.contact.emailIds = [];
     res.contact.emailIds = emailIds.split(",");
 
-    var fax = obj.fax;
-    res.contact.fax = fax;
+    var faxes = orgUtils.getFaxes(obj.faxes);
+    res.contact.fax = [];
+    res.contact.fax = faxes.split(",");
 
-    var whatsappId = obj.whatsappId;
-    res.contact.whatsappId = whatsappId;
+    var whatsappIds = orgUtils.getWhatsAppIds( obj.whatsappIds );
+    res.contact.whatsappIds = [];
+    res.contact.whatsappIds = whatsappIds.split(",");
 
-    res.contactMode = orgUtils.getContactMode( obj.contactMode );
+    res.contactMode = orgUtils.getContactMode( obj.contMode );
 
     var typeInfo = {};
     typeInfo.orgType = orgUtils.getOrgType( obj.orgType );
@@ -46,14 +84,15 @@ var getOrgObj = function ( obj ) {
     res.typeInfo = typeInfo;
 
     var estMealAmnt = {};
-    var breakfastAmnt = obj.breakfastAmnt ? obj.breakfastAmnt : 1;
-    var lunchAmnt = obj.lunchAmnt ? obj.lunchAmnt : 1;
-    var dinnerAmnt = obj.dinnerAmnt ? obj.dinnerAmnt : 1;
+    estMealAmnt.breakfastAmnt = orgUtils.getBreakFastAmnt( obj.estBreakfastAmnt );
+    estMealAmnt.lunchAmnt = orgUtils.getLunchAmnt( obj.estLunchAmnt );
+    estMealAmnt.dinnerAmnt = orgUtils.getDinnerAmnt( obj.estDinnerAmnt );
     res.estMealAmnt = estMealAmnt;
 
-    res.comment = obj.comment ? obj.comment : "God bless you!";
+    var comment = orgUtils.getComment( obj.comment );
+    res.comment = comment;
 
-    return obj;
+    return res;
 }
 
 var getOrgObjForSearch = function ( obj ) {
@@ -79,7 +118,7 @@ var getOrgObjForSearch = function ( obj ) {
     res.orgForName = orgUtils.getOrgForName( obj.orgForName );
         //( obj.orgForName !== undefined && obj.orgForName.length > 0 ) ? obj.orgForName : undefined;
 
-    res.contactMode = orgUtils.getContactMode( obj.contactMode ); 
+    res.contactMode = orgUtils.getContactMode( obj.contMode );
         //( obj.contactMode !== undefined && obj.contactMode.length > 0 ) ? obj.contactMode : undefined;
 
     res.breakfast = {};
@@ -110,7 +149,10 @@ var getOrgObjForSearch = function ( obj ) {
 router.get('/', function(req, res, next) {
 
     var obj = {};
-    obj.id = req.query.id ? req.query.id : "3";
+    obj.id = orgUtils.getOrgEsId( req.query.id );
+    if( obj.id === undefined ){
+        res.send( "empty id provided" );
+    }
 
     var query = esQueryProvider.getOrgDataQuery(orgIndex, orgType, obj) ;
 
@@ -127,6 +169,11 @@ router.get('/', function(req, res, next) {
 router.post('/add-org', function(req, res, next) {
 
     var orgObj = getOrgObj( req.body );
+    var isValid = orgUtils.validateAddOrgData( orgObj );
+    if( isValid.error === true ){
+        res.send( isValid.msg );
+    }
+    
     var query = esQueryProvider.addOrgQuery(orgIndex, orgType, orgObj) ;
 
     esClient.create( query ).then(function (resp) {

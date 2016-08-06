@@ -53,6 +53,10 @@ module.exports = {
                 NEEDY: "needy"
             }
         }
+    },
+
+    log:{
+        file : "/tmp/logs"
     }
 
 }
