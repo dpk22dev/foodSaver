@@ -1,9 +1,9 @@
 var FsConfig = require('./config.js');
 var constants = FsConfig.constants;
 
-exports.getMealSearchQuery = function ( idx, itype, foodType, forStr, refrig, radius, coordArr ) {
+exports.getMealSearchQuery = function ( idx, itype, obj ) {
 
-    if( foodType == constants.VEG_FOODTYPE ){
+    if( obj.foodType == constants.VEG_FOODTYPE ){
         foodQuery = {"term": {"food-type": constants.VEG_FOODTYPE}};
     }else{
         foodQuery = {"term": {"food-type": constants.VEG_FOODTYPE}}, {"term": {"food-type": constants.NONVEG_FOODTYPE}};
@@ -18,13 +18,13 @@ exports.getMealSearchQuery = function ( idx, itype, foodType, forStr, refrig, ra
                 "bool": {
                     "must": [
                         foodQuery,
-                        {"term": {"for": forStr}},
-                        {"term": {"refrigeration": refrig}}
+                        {"term": {"for": obj.forStr}},
+                        {"term": {"refrigeration": obj.refrig}}
                     ],
                     "filter": {
                         "geo_distance": {
-                            "distance": radius,
-                            "pick-up-coord": coordArr
+                            "distance": obj.radius,
+                            "pick-up-coord": obj.coordArr
                         }
                     }
                 }

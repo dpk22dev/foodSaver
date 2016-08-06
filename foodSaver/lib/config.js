@@ -52,7 +52,9 @@ module.exports = {
                 DONOR: "donor",
                 NEEDY: "needy"
             }
-        }
+        },
+        LON:77,
+        LAT: 29
     },
 
     log:{

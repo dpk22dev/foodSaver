@@ -1,4 +1,20 @@
-//var FsConfig = require('./config.js');
+var FsConfig = require('./config.js');
+var constants = FsConfig.constants;
+
+exports.returnUndefIfInvalidStr = function ( str ) {
+    var res = ( str !== undefined && str.length > 0 ) ? str : undefined;
+    return res;
+}
+
+exports.returnMinusOneIfNotInt = function ( num ) {
+    var res = ( num !== undefined && num.length > 0 ) ? parseInt(num) : -1;
+    return res;
+}
+
+exports.returnMinusOneIfNotFloat = function ( num ) {
+    var res = ( num !== undefined && num.length > 0 ) ? parseFloat(num) : -1;
+    return res;
+}
 
 exports.getOrgEsId = function ( id ) {
     var res = ( id !== undefined && id.length > 0 ) ? id : undefined;
@@ -76,11 +92,11 @@ exports.getWhatsAppIds = function ( wIds ) {
 }
 
 exports.getLon = function( lon ){
-    return ( lon !== undefined ) ? parseFloat( lon ) : 77;
+    return ( lon !== undefined ) ? parseFloat( lon ) : constants.LON;
 }
 
 exports.getLat = function ( lat ) {
-    return ( lat !== undefined ) ? parseFloat( lat ) : 29;
+    return ( lat !== undefined ) ? parseFloat( lat ) : constants.LAT;
 }
 
 exports.getRadius = function ( radius ) {
@@ -138,7 +154,7 @@ exports.validateAddOrgData = function ( org ) {
 
     if( org.name === undefined ){
         ret.msg.push( "org name not provided" );
-        return ret;
+        //return ret;
     }
 
     if( org.address.street === undefined || org.address.city === undefined || org.address.state === undefined ){
@@ -208,4 +224,3 @@ exports.validateAddOrgData = function ( org ) {
     return ret;
 
 }
-
