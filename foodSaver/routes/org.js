@@ -12,14 +12,14 @@ var orgType = config.es.orgIndexType;
 
 var getOrgObj = function ( obj ) {
     var res = {};
-    res.name = obj.name ? obj.name : "dummy";
+    res.name = orgUtils.getOrgName( obj.orgName );
     res.address = {};
-    res.address.street = obj.street ? obj.street : "dummy street";
-    res.address.city = obj.city ? obj.city : "noida";
+    res.address.street = orgUtils.getStreet( obj.street );
+    res.address.city = orgUtils.getCity( obj.city );
     res.address.state = obj.state ? obj.state : "uttar pradesh";
     res.address.zip = obj.zip ? obj.zip : '124001';
-    var lon = obj.lon ? obj.lon : 77;
-    var lat = obj.lat ? obj.lat : 29;
+    var lon = orgUtils.getLon( obj.lon );
+    var lat = orgUtils.getLat( obj.lat );
     res.locCoord = [lon, lat];
     var contact = {};
     var persons = obj.persons;
@@ -37,12 +37,12 @@ var getOrgObj = function ( obj ) {
     var whatsappId = obj.whatsappId;
     res.contact.whatsappId = whatsappId;
 
-    res.contactMode = obj.contactMode ? obj.contactMode : "all";
+    res.contactMode = orgUtils.getContactMode( obj.contactMode );
 
     var typeInfo = {};
-    typeInfo.orgType = obj.orgType ? obj.orgType : "donor";
-    typeInfo.orgFor = obj.orgFor ? obj.orgFor : "human";
-    typeInfo.orgForName = obj.orgForName ? obj.orgForName : "children";
+    typeInfo.orgType = orgUtils.getOrgType( obj.orgType );
+    typeInfo.orgFor = orgUtils.getOrgFor( obj.orgFor );
+    typeInfo.orgForName = orgUtils.getOrgForName( obj.orgForName );
     res.typeInfo = typeInfo;
 
     var estMealAmnt = {};

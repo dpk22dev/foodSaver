@@ -5,6 +5,22 @@ exports.getOrgName = function ( orgName ) {
     return res;
 }
 
+exports.getStreet = function ( street ) {
+    var res = ( street !== undefined && street.length > 0 ) ? street : undefined;
+    return res;
+}
+
+exports.getCity = function ( city ) {
+    var res = ( city !== undefined && city.length > 0 ) ? city : undefined;
+    return res;
+}
+
+exports.getState = function ( stete ) {
+    var res = ( stete !== undefined && stete.length > 0 ) ? stete : undefined;
+    return res;
+}
+
+
 exports.getLon = function( lon ){
     return ( lon !== undefined ) ? parseFloat( lon ) : 77;
 }
