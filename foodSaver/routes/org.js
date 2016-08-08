@@ -45,6 +45,7 @@ every request should follow it
 
 var getOrgObj = function ( obj ) {
     var res = {};
+    res.id = orgUtils.getOrgEsId( obj.orgId );
     res.name = orgUtils.getOrgName( obj.orgName );
     res.address = {};
     res.address.street = orgUtils.getStreet( obj.street );
@@ -149,40 +150,57 @@ var getOrgObjForSearch = function ( obj ) {
 router.get('/', function(req, res, next) {
 
     var obj = {};
-    obj.id = orgUtils.getOrgEsId( req.query.id );
+    obj.id = orgUtils.getOrgEsId( req.query.orgId );
     if( obj.id === undefined ){
-        res.send( "empty id provided" );
+        res.status(404).send( "empty id provided" );
     }
 
     var query = esQueryProvider.getOrgDataQuery(orgIndex, orgType, obj) ;
 
     esClient.search( query ).then(function (resp) {
-        var respArr = resp.hits.hits;
+        var respArr = resp.hits.hits[0]._source;
         res.send( respArr );
     }, function (err) {
         console.trace(err.message);
-        res.send( err.message );
+        res.status(404).send( err.message );
     });
 
 });
 
 router.post('/add-org', function(req, res, next) {
-
+    
     var orgObj = getOrgObj( req.body );
     var isValid = orgUtils.validateAddOrgData( orgObj );
     if( isValid.error === true ){
-        res.send( isValid.msg );
+        res.status(500).send( isValid.msg );
     }
-    
-    var query = esQueryProvider.addOrgQuery(orgIndex, orgType, orgObj) ;
 
-    esClient.create( query ).then(function (resp) {
-        var respArr = resp.hits.hits;
-        res.send( respArr );
-    }, function (err) {
-        console.trace(err.message);
-        res.send( err.message );
-    });
+    if( orgObj.id === undefined ){
+        var query = esQueryProvider.addOrgQuery(orgIndex, orgType, orgObj);
+
+        esClient.create( query ).then(function (resp) {
+            var respArr = resp.hits.hits;
+            res.send( respArr );
+        }, function (err) {
+            console.trace(err.message);
+            res.send( err.message );
+        });
+
+    }else{
+        var query = esQueryProvider.updateOrgQuery( orgIndex, orgType, orgObj );
+
+        esClient.update( query ).then(function (resp) {
+            var respArr = resp.hits.hits;
+            res.send( respArr );
+        }, function (err) {
+            console.trace(err.message);
+            res.send( err.message );
+        });
+    }
+
+
+
+
 
 });
 

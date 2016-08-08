@@ -3,17 +3,25 @@ var webroApp = angular.module('foodsaver', ['ngRoute', 'angular-loading-bar', 'n
 webroApp.config( function ($routeProvider) {
 
     $routeProvider
-        .when('/login', {
+        .when('/home', {
             templateUrl : '/tmpl/login.html',
             controller  : 'loginController'
         })
-        .when('/profile', {
+        /*.when('/profile', {
             templateUrl : '/tmpl/profile.html',
             controller  : 'profileController'
         })
         .when('/search', {
             templateUrl : '/tmpl/search.html',
             controller  : 'searchController'
+        })*/
+        /*.when('/meal', {
+            templateUrl : '/tmpl/meal.html',
+            controller  : 'mealController'
+        })*/
+        .when('/update-org', {
+            templateUrl : '/tmpl/update-org.html',
+            controller  : 'updateOrgController'
         })
 });
 

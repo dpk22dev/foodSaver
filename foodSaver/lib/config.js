@@ -21,7 +21,9 @@ module.exports = {
             CONT_MODE: {
                 ALL: "all",
                 PHONE: "phone",
-                WHATSAPP: "whatsapp"
+                WHATSAPP: "whatsapp",
+                PERSON: "person",
+                NONE: "none"
             },
             FOOD_TYPE: {
                 VEG: "veg",

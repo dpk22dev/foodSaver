@@ -12,8 +12,8 @@ block css
     link(rel='stylesheet', href='/bower_components/angular-loading-bar/build/loading-bar.min.css' )
 block js
   if env=="development"
-    script(src="/javascripts/external/bootstrap.js")
     script(src="/javascripts/external/jquery.js")
+    script(src="/javascripts/external/bootstrap.js")
 
     script(src="/bower_components/angular/angular.js")
     script(src="/bower_components/angular-route/angular-route.js")
@@ -24,13 +24,14 @@ block js
 
     script(src="/javascripts/main-foodsaver.js")
 
-    script(src="/javascripts/controllers/indexController.js")
-    script(src="/javascripts/controllers/loginController.js")
-    script(src="/javascripts/controllers/profileController.js")
-    script(src="/javascripts/controllers/searchController.js")
+    script(src="/javascripts/controllers/IndexController.js")
+    script(src="/javascripts/controllers/LoginController.js")
+    script(src="/javascripts/controllers/UpdateOrgController.js")
 
-    script(src="/javascripts/services/configs.js")
-    script(src="/javascripts/services/logger.js")
+    script(src="/javascripts/services/ConfigsService.js")
+    script(src="/javascripts/services/LoggerService.js")
+    script(src="/javascripts/services/MealCrudService.js")
+    script(src="/javascripts/services/OrgCrudService.js")
 
     script( src='/bower_components/angular-loading-bar/build/loading-bar.js' )
     script( src='/bower_components/angular-animate/angular-animate.js' )
@@ -56,22 +57,24 @@ block content
                     ul.nav.navbar-nav
                         li.active
                             a(href="#home") Home
+
                         li.dropdown
-                            a(href="#", class="dropdown-toggle", data-toggle="dropdown" ) profile
+                            a(href="#", class="dropdown-toggle", data-toggle="dropdown" ) Meal
                                 span.caret
                             ul.dropdown-menu
-                                //li
-                                  //a(href="#") Assigned Channel
-                                //li
-                                  //a(href="#") Assigned Content
                                 li
-                                    a(href="#search") Search
-                        //li
-                          //a(href="#") SMS Reader Opinion
-                        //li
-                          //a(href="#") Assign Reader Opinion
-                        li
-                            a(href="#history") History
+                                  a(href="#donate-meal") Donate a meal
+                                  a(href="#active-meals") Active meals
+                                  a(href="#meal-history") Meal history
+                                  a(href="#search-meal") Search a meal
+
+                        li.dropdown
+                            a(href="#", class="dropdown-toggle", data-toggle="dropdown" ) Organization
+                                span.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href="#update-org") Update your organization
+                                    a(href="#search-org") Search nearby organizations
 
                 else
                     | For accessing this site please login

@@ -19,11 +19,47 @@ exports.getOrgDataQuery = function ( idx, itype, obj ) {
     return searchParams;
 }
 
-exports.addOrgQuery = function ( idx, itype, obj ) {
+exports.updateOrgQuery = function ( idx, itype, obj ) {
+
     var searchParams = {
         index: idx,
         type: itype,
+        id: obj.id,
+        body: {
+            "name" : obj.name,
+            "address": {
+                "street" : obj.address.street,
+                "city" : obj.address.city,
+                "state": obj.address.state,
+                "zip": obj.address.zip
+            },
+            "loc-coord": obj.locCoord,
+            "contact" : {
+                "contact-persons": obj.contact.contactPersons,
+                "phones": obj.contact.phones,
+                "email-ids": obj.contact.emailIds,
+                "fax": obj.contact.fax,
+                "whatsapp-id": obj.contact.whatsappId
+            },
+            "contact-mode" : obj.contactMode,
+            "type-info" : {
+                "org-type" : obj.orgType,
+                "org-for" : obj.orgFor,
+                "org-for-name" : obj.orgForName
+            },
+            "est-meal-amount" : obj.estMealAmnt,
+            "comment" : obj.comment,
+            "rating" : 3
+        }
+    };
+    return searchParams;
+}
 
+exports.addOrgQuery = function ( idx, itype, obj ) {
+
+    var searchParams = {
+        index: idx,
+        type: itype,
         body: {
             "name" : obj.name,
             "address": {
