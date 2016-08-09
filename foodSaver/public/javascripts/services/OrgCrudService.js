@@ -6,10 +6,10 @@ angular.module('foodsaver').factory('orgCrudService', ['$http', 'FsConfigService
         res.orgName = orgData.name;
         res.street = orgData.address.street;
         res.city = orgData.address.city;
-        res.state = orgData.address.state
-        res.zip = orgData.address.zip
-        res.lon = orgData['loc-coord'][0];
-        res.lat = orgData['loc-coord'][1];
+        res.state = orgData.address.state;
+        res.zip = orgData.address.zip.toString();
+        res.lon = orgData['loc-coord'][0].toString();
+        res.lat = orgData['loc-coord'][1].toString();
         res.persons = getContactPersons( orgData );
         res.phones = getContactPhones( orgData );
         res.emailIds = getEmailIds( orgData );
@@ -19,14 +19,15 @@ angular.module('foodsaver').factory('orgCrudService', ['$http', 'FsConfigService
         res.orgType = fsConfigs.orgTypeArr[0].value;
         res.orgFor = fsConfigs.orgForArr[0].value;
         res.orgForName = getOrgForName( orgData );
-        res.estBreakfastAmnt = orgData['est-meal-amount']['breakfast'];
-        res.estLunchAmnt = orgData['est-meal-amount']['lunch'];
-        res.estDinnerAmnt = orgData['est-meal-amount']['dinner'];
+        res.estBreakfastAmnt = orgData['est-meal-amount']['breakfast'].toString();
+        res.estLunchAmnt = orgData['est-meal-amount']['lunch'].toString();
+        res.estDinnerAmnt = orgData['est-meal-amount']['dinner'].toString();
         res.comment = orgData.comment;
+        res.rating = orgData.rating.toString();
 
         return res;
     }
-    
+/*
     var orgObjectForPostData = function ( ) {
         var res = {};
         res.orgName = orgData.name;
@@ -52,7 +53,7 @@ angular.module('foodsaver').factory('orgCrudService', ['$http', 'FsConfigService
 
         return res;
     }
-    
+*/
     var getOrgData = function( orgId, cb ){
 
         var orgDataFetchUrl = fsConfigs.domain + ':' + fsConfigs.port + fsConfigs.orgGetApiUriPath + '?orgId='+orgId;
@@ -134,7 +135,6 @@ angular.module('foodsaver').factory('orgCrudService', ['$http', 'FsConfigService
         getOrgData : getOrgData,
         updateOrgData: updateOrgData,
         searchNearbyOrgs: searchNearbyOrgs,
-        orgObjectForPostData: orgObjectForPostData,
         getViewData: getViewData
     }
 

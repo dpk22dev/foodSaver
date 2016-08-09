@@ -43,13 +43,17 @@ exports.updateOrgQuery = function ( idx, itype, obj ) {
             },
             "contact-mode" : obj.contactMode,
             "type-info" : {
-                "org-type" : obj.orgType,
-                "org-for" : obj.orgFor,
-                "org-for-name" : obj.orgForName
+                "org-type" : obj.typeInfo.orgType,
+                "org-for" : obj.typeInfo.orgFor,
+                "org-for-name" : obj.typeInfo.orgForName
             },
-            "est-meal-amount" : obj.estMealAmnt,
+            "est-meal-amount" : {
+                "breakfast": obj.estMealAmnt.breakfastAmnt,
+                "lunch": obj.estMealAmnt.lunchAmnt,
+                "dinner": obj.estMealAmnt.dinnerAmnt
+            },
             "comment" : obj.comment,
-            "rating" : 3
+            "rating" : obj.rating
         }
     };
     return searchParams;
@@ -78,13 +82,17 @@ exports.addOrgQuery = function ( idx, itype, obj ) {
             },
             "contact-mode" : obj.contactMode,
             "type-info" : {
-                "org-type" : obj.orgType,
-                "org-for" : obj.orgFor,
-                "org-for-name" : obj.orgForName
+                "org-type" : obj.typeInfo.orgType,
+                "org-for" : obj.typeInfo.orgFor,
+                "org-for-name" : obj.typeInfo.orgForName
             },
-            "est-meal-amount" : obj.estMealAmnt,
+            "est-meal-amount" : {
+                "breakfast": obj.estMealAmnt.breakfastAmnt,
+                "lunch": obj.estMealAmnt.lunchAmnt,
+                "dinner": obj.estMealAmnt.dinnerAmnt
+            },
             "comment" : obj.comment,
-            "rating" : 3
+            "rating" : obj.rating
         }
     };
     return searchParams;

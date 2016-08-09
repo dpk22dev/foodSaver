@@ -175,12 +175,37 @@ router.post('/add-org', function(req, res, next) {
         res.status(500).send( isValid.msg );
     }
 
+    //@todo get rating from db and insert before updating/inserting data in es
+    //rating is reqd for updating also
+    orgObj.rating = 3.2;
+
+    //@todo checking update query, remove once done
+    orgObj.id = "3";
+
+    //using index api instead, as update wanted script and not good on SO
+    var query = esQueryProvider.addOrgQuery(orgIndex, orgType, orgObj);
+
+    esClient.index( query ).then(function (resp) {
+        if (resp.created == true) {
+            res.send(resp.created);
+        } else {
+            res.status(500).send(resp.created);
+        }
+    }, function (err) {
+        console.trace(err.message);
+        res.send( err.message );
+    });
+
+    /*
     if( orgObj.id === undefined ){
         var query = esQueryProvider.addOrgQuery(orgIndex, orgType, orgObj);
 
         esClient.create( query ).then(function (resp) {
-            var respArr = resp.hits.hits;
-            res.send( respArr );
+            if (resp.created == true) {
+                res.send(resp.created);
+            } else {
+                res.status(500).send(resp.created);
+            }
         }, function (err) {
             console.trace(err.message);
             res.send( err.message );
@@ -197,7 +222,7 @@ router.post('/add-org', function(req, res, next) {
             res.send( err.message );
         });
     }
-
+*/
 
 
 

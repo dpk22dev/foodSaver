@@ -40,7 +40,7 @@
   }
 }*/
 
-{
+/*{
   "query": {
     "bool": {
       "must": [
@@ -56,6 +56,15 @@
       }
     }
   }
+}*/
+
+{
+  "query": {
+    "match": {
+    "name": "C org"
+  }
+  }
 }
+
 
 //update api for meals status and recipient
