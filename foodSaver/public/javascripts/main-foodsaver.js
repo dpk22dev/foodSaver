@@ -23,6 +23,14 @@ webroApp.config( function ($routeProvider) {
             templateUrl : '/tmpl/update-org.html',
             controller  : 'updateOrgController'
         })
+        .when('/search-org', {
+            templateUrl : '/tmpl/search-org.html',
+            controller  : 'searchOrgController'
+        })
+        .when('/donate-meal', {
+            templateUrl : '/tmpl/add-meal.html',
+            controller  : 'donateMealController'
+        })
 });
 
 /*webroApp.run(['$rootScope', '$location', 'auth', function ($rootScope, $location, auth) {

@@ -147,6 +147,27 @@ exports.getRating = function (rating ) {
     return ( rating !== undefined && rating.length > 0 ) ? parseFloat( rating ) : -1;
 }
 
+exports.getOrgDataAfterSearch = function ( arr ) {
+
+    var res = [];
+//@todo data should be returned based on profile settings set by org admin
+    arr.forEach( function (obj) {
+        org = obj._source;
+        temp = {};
+        temp.address = org.address;
+        temp.contact = org.contact;
+        temp['est-meal-amount'] = org['est-meal-amount'];
+        temp['loc-coord'] = org['loc-coord'];
+        temp['name'] = org.name;
+        temp.rating = org.rating;
+        temp['type-info'] = org['type-info'];
+        res.push( temp );
+    });
+
+    return res;
+
+}
+
 exports.validateAddOrgData = function ( org ) {
     var ret = {};
     ret.error = true;

@@ -1,0 +1,2 @@
+  check if array is really empty
+  if(typeof array != "undefined" && array != null && array.length > 0){}

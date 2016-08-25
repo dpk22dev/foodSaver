@@ -234,9 +234,18 @@ router.post('/search', function(req, res, next) {
     var orgObj = getOrgObjForSearch( req.body );
     var query = esQueryProvider.searchOrgQuery(orgIndex, orgType, orgObj) ;
 
+    //@todo send only batches org data say 10 at a time
     esClient.search( query ).then(function (resp) {
-        var respArr = resp.hits.hits;
-        res.send( respArr );
+        //var respArr = resp.hits.hits;
+        //@todo send org-data which we want to show only
+        var array = resp.hits.hits;
+        if( typeof array != "undefined" && array != null && array.length > 0){
+            respArr = orgUtils.getOrgDataAfterSearch( array );
+            res.send( respArr );
+        }else{
+            res.send( [] );
+        }
+
     }, function (err) {
         console.trace(err.message);
         res.send( err.message );

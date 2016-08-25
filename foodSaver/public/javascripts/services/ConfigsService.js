@@ -6,6 +6,7 @@ angular.module('foodsaver').factory('FsConfigService', function(){
 		  cacheTimeout: 30,
           orgGetApiUriPath: "/org",
           orgAddApiUriPath: "/org/add-org",
+          orgSearchApiUriPath: "/org/search",
 
           contactModesArr: [
               {"value":"all","text":"all modes"},
@@ -14,6 +15,7 @@ angular.module('foodsaver').factory('FsConfigService', function(){
               {"value":"person","text":"person to person"},
               {"value":"none","text":"do not contact"}
           ],
+          defaultContactMode: {"value":"all","text":"all modes"},
           orgTypeArr: [
               {"value":"needy","text":"Needy"},
               {"value":"donor","text":"Donor"}
@@ -21,6 +23,17 @@ angular.module('foodsaver').factory('FsConfigService', function(){
           orgForArr: [
               {"value":"human","text":"Humans"},
               {"value":"animals","text":"Animals"}
-          ]
+          ],
+          defaultOrgFor: {"value":"human","text":"Humans"},
+          defaultForName: "",
+          foodTypeArr: [
+              {"value":"veg","text":"Veg only"},
+              {"value":"non-veg","text":"veg/Non veg"}
+          ],
+          defaultFoodType : {"value":"veg","text":"Veg only"},
+          defaultDonationQuantity: {"value":"0.5","text":"Half kg"}
+            
+            
+            
         }
 } );

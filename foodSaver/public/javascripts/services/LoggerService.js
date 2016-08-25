@@ -65,8 +65,6 @@ angular.module('foodsaver').factory('FsLoggerService', ['$http', 'FsConfigServic
 
     return {
         sendLog : sendLog,
-        //setUA: setUA,
-        //setEditorId: setEditorId,
         setMsg: setMsg,
         consoleLog: consoleLog,
         consoleWarn: consoleWarn,
