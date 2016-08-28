@@ -3,24 +3,44 @@ angular.module('foodsaver').factory('mealCrudService', ['$http', 'FsConfigServic
     var getAddMealViewData = function ( donId ) {
         //@todo below settings should be based on user org preferences if he is donor
         var res = {};
-        res.donorId = donId;
-        res.contactMode = fsConfigs.defaultContactMode.value;
+        res.orgId = donId;
+        res.contMode = fsConfigs.defaultContactMode.value;
         res.foodType = fsConfigs.defaultFoodType.value;
         res.quantity = fsConfigs.defaultDonationQuantity.value;
-        res.for = fsConfigs.defaultOrgFor.value;
-        res.forName = fsConfigs.defaultForName;
+        res.mealFor = fsConfigs.defaultOrgFor.value;
+        res.mealForName = fsConfigs.defaultForName;
         res.foodInfo = "";
-        res.pStreet= "";
-        res.pCity = "";
-        res.pState = "";
-        res.pZip = "";
-        res.pLat = "";
-        res.pLon = "";
-        res.psTime = "";
-        res.peTime = "";
+        res.street= "";
+        res.city = "";
+        res.state = "";
+        res.zip = "";
+        res.lon = "";
+        res.lat = "";
+        res.startPickTime = "";
+        res.endPickTime = "";
         res.comment = "";
-        res.refg = "";
+        res.refrig = "";
         res.estExpTime = "";
+    }
+
+    var updateMealData = function ( mealData, cb ) {
+
+        var mealDataAddUrl = fsConfigs.domain + ':' + fsConfigs.port + fsConfigs.orgAddApiUriPath;
+        var req = {
+            method: 'POST',
+            url: mealDataAddUrl,
+            headers: {
+            },
+            data: mealData
+        }
+
+        $http(req).then(function( response ){
+            if( response !== undefined ) {
+                if ( cb !== undefined && typeof cb === 'function' )
+                    cb(response);
+            }
+        } );
+
     }
 
     return {

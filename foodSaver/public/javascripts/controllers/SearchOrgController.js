@@ -25,7 +25,7 @@ angular.module('foodsaver').controller('searchOrgController', [ '$scope', '$http
         notifMsg = "";
         if(typeof array != "undefined" && array != null && array.length > 0) {
             $scope.notification.forEach(function (obj) {
-                if ('error' === obj.type) {
+                if ('warning' === obj.type) {
                     notifMsg += obj.reason;
                 }
             });
@@ -49,11 +49,11 @@ angular.module('foodsaver').controller('searchOrgController', [ '$scope', '$http
                     });
                 }else{
                     //@todo set some msg to show error in getting response on view
-                    $scope.notification.push( { "type":"error", "reason": "empty response from server" } );
+                    $scope.notification.push( { "type":"warning", "reason": "empty response from server" } );
                 }
             }else{
                 //show message reason for failure
-                $scope.notification.push( { "type":"error", "reason": "Error in getting response from server" } );
+                $scope.notification.push( { "type":"warning", "reason": "Error in getting response from server" } );
             }
         });
 

@@ -8,6 +8,7 @@ angular.module('foodsaver').factory('FsConfigService', function(){
           orgAddApiUriPath: "/org/add-org",
           orgSearchApiUriPath: "/org/search",
 
+          mealAddApiUriPath: '/meal/add-meal',
           contactModesArr: [
               {"value":"all","text":"all modes"},
               {"value":"phone","text":"call and sms"},
@@ -31,9 +32,12 @@ angular.module('foodsaver').factory('FsConfigService', function(){
               {"value":"non-veg","text":"veg/Non veg"}
           ],
           defaultFoodType : {"value":"veg","text":"Veg only"},
-          defaultDonationQuantity: {"value":"0.5","text":"Half kg"}
-            
-            
+          defaultDonationQuantity: {"value":"0.5","text":"Half kg"},
+          refrigArr: [
+                {"value":"yes","text":"Yes sure"},
+                {"value":"no","text":"Not necessary"}
+          ],
+          defaultRefrig : {"value":"yes","text":"Yes sure"}
             
         }
 } );
