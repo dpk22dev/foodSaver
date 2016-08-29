@@ -2,91 +2,93 @@ extends layout
 
 block css
   if env=="development"
-    link(rel="stylesheet", href="/stylesheets/external/bootstrap.css")
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="plugins/angular-material/angular-material.min.css")
+    link(rel="stylesheet", href="/css/bootstrap.css")
+    link(rel='stylesheet', href='/css/site.css')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/nga.all.min.css')
+    link(rel='stylesheet', href='/css/themes.css')
+    link(rel='stylesheet', href='/css/dashboard.css')
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/plugins/bootstrap-slider/slider.css')
+    link(rel='stylesheet', href='/css/flexslider.css')
+    link(rel='stylesheet', href='/plugins/owl-carousel/owl.theme.css')
+    link(rel='stylesheet', href='/plugins/owl-carousel/owl.transitions.css')
+    link(rel='stylesheet', href='/plugins/owl-carousel/owl.carousel.css')
     // link(rel='stylesheet', href='css/app.css')
     // link(rel='stylesheet', href='css/bootstrap.css')
-    link(rel='stylesheet', href='/bower_components/angular-loading-bar/build/loading-bar.css' )
+    //link(rel='stylesheet', href='/bower_components/angular-loading-bar/build/loading-bar.css' )
   else
     link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
     link(rel='stylesheet', href='/bower_components/angular-loading-bar/build/loading-bar.min.css' )
 block js
   if env=="development"
-    script(src="/javascripts/external/jquery.js")
-    script(src="/javascripts/external/bootstrap.js")
+    script(src="/js/jquery.min.js")
+    script(src="/js/bootstrap.min.js")
+    script(src="/plugins/bootstrap-slider/bootstrap-slider.js")
+    script(src="/js/angular.min.js")
+    script(src="/js/angular-animate.min.js")
+    script(src="/js/angular-ui-router-min.js")
+    script(src="/js/angular-resource.js")
+    script(src="/plugins/knob/jquery.knob.js")
+    script(src="/plugins/Chart.min.js")
+    script(src="/plugins/owl-carousel/owl.carousel.min.js")
 
-    script(src="/bower_components/angular/angular.js")
-    script(src="/bower_components/angular-route/angular-route.js")
+    // Angular Material Library
+    script(src="/js/angular-material.min.js")
+    script(src="/js/angular-aria.min.js")
+    script(src="/js/angular-messages.min.js")
 
-    script(src='/bower_components/angular-cookies/angular-cookies.js')
-    script( src='/bower_components/angular-local-storage/angular-local-storage.js' )
-    //script(src="/javascripts/services/logTimer.js")
+    script(src="/js/angular-flash.js")
+    script(src="/js/angular-sanitize.js")
+    script(src="/js/ui-bootstrap-tpls-0.13.0.min.js")
 
-    script(src="/javascripts/main-foodsaver.js")
+    //Common
+    script(src="/app/common/config.js")
 
-    script(src="/javascripts/controllers/IndexController.js")
-    script(src="/javascripts/controllers/LoginController.js")
-    script(src="/javascripts/controllers/UpdateOrgController.js")
-    script(src="/javascripts/controllers/SearchOrgController.js")
-    script(src="/javascripts/controllers/DonateMealController.js")
+    //main app
+    script(src="/app/app.js")
+    script(src="/app/common/appCtrl.js")
+    script(src="/app/services/apiService.js")
 
-    script(src="/javascripts/services/ConfigsService.js")
-    script(src="/javascripts/services/LoggerService.js")
-    script(src="/javascripts/services/MealCrudService.js")
-    script(src="/javascripts/services/OrgCrudService.js")
-    script(src="/javascripts/services/UtilsService.js")
+    //Login Module
+    script(src="/app/modules/login/loginMgmt.js")
+    script(src="/app/modules/login/loginService.js")
+    script(src="/app/modules/login/loginCtrl.js")
 
-    script( src='/bower_components/angular-loading-bar/build/loading-bar.js' )
-    script( src='/bower_components/angular-animate/angular-animate.js' )
+    //Dashboard Module
+    script(src="/app/modules/dashboard/dashboardApplication.js")
+    script(src="/app/modules/dashboard/dashboardService.js")
+
+    //services
+    script(src="/app/services/ConfigsService.js")
+    script(src="/app/services/LoggerService.js")
+    script(src="/app/services/MealCrudService.js")
+    script(src="/app/services/OrgCrudService.js")
+    script(src="/app/services/UtilsService.js")
+
+    //Controllers
+    script(src="/app/modules/dashboard/controllers/websites.js")
+    script(src="/app/modules/dashboard/controllers/about.js")
+    script(src="/app/modules/dashboard/controllers/achievements.js")
+    script(src="/app/modules/dashboard/controllers/contact.js")
+    script(src="/app/modules/dashboard/controllers/education.js")
+    script(src="/app/modules/dashboard/controllers/experience.js")
+    script(src="/app/modules/dashboard/controllers/gallery.js")
+    script(src="/app/modules/dashboard/controllers/portfolio.js")
+    script(src="/app/modules/dashboard/controllers/home.js")
+    script(src="/app/modules/dashboard/controllers/recent.js")
+    script(src="/app/modules/dashboard/controllers/skills.js")
+    script(src="/app/modules/dashboard/controllers/UpdateOrgController.js")
+
+    //script( src='/bower_components/angular-loading-bar/build/loading-bar.js' )
+    //script( src='/bower_components/angular-animate/angular-animate.js' )
   else
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
-    script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
-    script(src="/dist/js/bower_components.min.js")
-    script(src="/dist/js/main.min.js")
+    //script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
+    //script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+    //script(src="/dist/js/bower_components.min.js")
+    //script(src="/dist/js/main.min.js")
 
 block content
-    div( ng-app="foodsaver" )
-
-        div.alert.alert-danger.hidden
-            a(href="#", class="close")
-            p alert message
-
-        nav.navbar
-            div.container-fluid
-                div.navbar-header
-                    img(src="/images/savefood.jpg")
-
-                if showNav
-                    ul.nav.navbar-nav
-                        li.active
-                            a(href="#home") Home
-
-                        li.dropdown
-                            a(href="#", class="dropdown-toggle", data-toggle="dropdown" ) Meal
-                                span.caret
-                            ul.dropdown-menu
-                                li
-                                  a(href="#donate-meal") Donate a meal
-                                  a(href="#active-meals") Active meals
-                                  a(href="#meal-history") Meal history
-                                  a(href="#search-meal") Search a meal
-
-                        li.dropdown
-                            a(href="#", class="dropdown-toggle", data-toggle="dropdown" ) Organization
-                                span.caret
-                            ul.dropdown-menu
-                                li
-                                    a(href="#update-org") Update your organization
-                                    a(href="#search-org") Search nearby organizations
-
-                else
-                    | For accessing this site please login
-
-                div.navbar-header.pull-right
-                    div( class="loginWrapper", ng-controller="loginController" )
-                        span {{loginStatusText}}
-                        button( class="btn btn-danger", type="button", ng-click="loginButtonClicked()", ng-show="showLoginBtn" )
-                            span.glyphicons.glyphicons-ok {{loginBtnText}}
-
-        div( ng-controller="indexController" )
-            div(ng-view)
+    div( flash-message="5000" )
+    div( ui-view )

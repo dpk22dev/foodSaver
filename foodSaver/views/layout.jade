@@ -3,11 +3,6 @@ html
   head
     title= 'food saver app'
     block css
+  body( ng-app="app" class="hold-transition sidebar-mini {{theme}} {{layout}}" )
     block js
-  body
-    block navbar
     block content
-    block footer
-      footer.footer.row
-        div.container
-          p.text-muted "Footer section"

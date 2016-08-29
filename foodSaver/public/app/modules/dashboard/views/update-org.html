@@ -1,0 +1,206 @@
+﻿<!--
+Author: Ranjithprabhu K
+Page Description: Dashboard page
+Date: 05 Jan 2016
+-->
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Add or update your organization info
+        </h1>
+        <ol class="breadcrumb">
+            <li><a><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li class="active">Add your organization</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-info" style="min-height:453px;">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                    <form data-ng-submit="vm.submitForm();" name="vm.contactForm">
+
+                        <md-content class="autoScroll">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Organization info</div>
+                                <div class="panel-body">
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Organization Name</label>
+                                        <md-icon class="fa fa-user"></md-icon>
+                                        <input type="text" required name="name" id="orgName" placeholder="Please enter org name" data-ng-model="viewData.orgName">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Type of organization</label>
+                                        <md-icon class="fa fa-org"></md-icon>
+                                        <md-select id="orgTypeSelect" ng-model="viewData.orgType">
+                                            <md-option ng-repeat="orgType in orgTypeArr" value="{{orgType.value}}">{{orgType.text}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>For</label>
+                                        <md-icon class="fa fa-for"></md-icon>
+                                        <md-select id="orgForSelect" ng-model="viewData.orgFor">
+                                            <md-option ng-repeat="orgFor in orgForArr" value="{{orgFor.value}}">{{orgFor.text}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>for name</label>
+                                        <md-icon class="fa fa-user"></md-icon>
+                                        <input type="text" required name="name" id="forName" placeholder="cat, dogs" ng-model="viewData.orgForName">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>breakfast</label>
+                                        <md-icon class="fa fa-breakfast"></md-icon>
+                                        <input type="text" required name="name" id="bfast" placeholder="enter breakfast amount" ng-model="viewData.estBreakfastAmnt">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>lunch</label>
+                                        <md-icon class="fa fa-lunch"></md-icon>
+                                        <input type="text" required name="name" id="lunch" placeholder="enter lunch amount" ng-model="viewData.estLunchAmnt">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Dinner</label>
+                                        <md-icon class="fa fa-dinner"></md-icon>
+                                        <input type="text" required name="name" id="dinner" placeholder="enter dinner amount" ng-model="viewData.estDinnerAmnt">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Comment</label>
+                                        <md-icon class="fa fa-comment"></md-icon>
+                                        <textarea class="form-control" rows="5" id="comment" ng-model="viewData.comment">{{viewData.comment}}</textarea>
+                                    </md-input-container>
+
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Address</div>
+                                <div class="panel-body">
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Street</label>
+                                        <md-icon class="fa fa-street"></md-icon>
+                                        <input type="text" required name="name" id="street" placeholder="House number, street" ng-model="viewData.street">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>city</label>
+                                        <md-icon class="fa fa-city"></md-icon>
+                                        <input type="text" required name="name" id="city" placeholder="City" ng-model="viewData.city">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>State</label>
+                                        <md-icon class="fa fa-state"></md-icon>
+                                        <input type="text" required name="name" id="state" placeholder="State" ng-model="viewData.state">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Zipcode</label>
+                                        <md-icon class="fa fa-zip"></md-icon>
+                                        <input type="text" required name="name" id="zip" placeholder="zip code" ng-model="viewData.zip">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Longitude Coordinate</label>
+                                        <md-icon class="fa fa-lon"></md-icon>
+                                        <input type="text" required name="name" id="lon" placeholder="longitude" ng-model="viewData.lon">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Zipcode</label>
+                                        <md-icon class="fa fa-zip"></md-icon>
+                                        <input type="text" required name="name" id="lat" placeholder="latitude" ng-model="viewData.lat">
+                                    </md-input-container>
+
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Contact</div>
+                                <div class="panel-body">
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Contact persons</label>
+                                        <md-icon class="fa fa-people"></md-icon>
+                                        <input type="text" required name="name" id="people" placeholder="enter comma separated persons to contact" ng-model="viewData.persons">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Phone Numbers</label>
+                                        <md-icon class="fa fa-phone"></md-icon>
+                                        <input type="text" required name="name" id="phone" placeholder="enter comma separated phone numbers" ng-model="viewData.phones">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Emails</label>
+                                        <md-icon class="fa fa-mail-reply"></md-icon>
+                                        <input type="text" required name="name" id="emails" placeholder="enter comma separated email" ng-model="viewData.emailIds">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Faxes</label>
+                                        <md-icon class="fa fa-fax"></md-icon>
+                                        <input type="text" required name="name" id="faxes" placeholder="enter comma separated faxes" ng-model="viewData.faxes">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Whatsapp</label>
+                                        <md-icon class="fa fa-whatsapp"></md-icon>
+                                        <input type="text" required name="name" id="whatsapp" placeholder="enter comma separated whatsapp" ng-model="viewData.whatsappIds">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label>Select contact mode</label>
+                                        <md-icon class="fa fa-phone"></md-icon>
+                                        <md-select ng-model="viewData.contMode">
+                                            <md-option ng-repeat="mode in modesArr" value="{{mode.value}}">{{mode.text}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+
+                                </div>
+                            </div>
+
+                            <md-input-container class="md-icon-float md-block">
+                                <label>Rating</label>
+                                <md-icon class="fa fa-rating"></md-icon>
+                                <input type="text" class="form-control" id="rating" value="{{viewData.rating}}" disabled>
+                            </md-input-container>
+
+                            <div class="pull-right">
+                                <md-button class="md-raised md-primary" type="submit">Send <i class="fa fa-angle-double-right"></i></md-button>
+                                <md-button class="md-raised md-warn" type="reset">Clear <i class="fa fa-trash-o"></i></md-button>
+                            </div>
+                        </md-content>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-warning">
+                    <div class="panel-body">
+                        <iframe src="http://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3358.6912101940134!2d77.01313021429891!3d11.036009868208257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8578b70408b17%3A0x7dfa27af6efe18bd!2sRanjithprabhu+K!5e1!3m2!1sen!2sin!4v1453522828509" height="450" frameborder="0" style="border:0;width:100%;" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section><!-- /.content -->
+
